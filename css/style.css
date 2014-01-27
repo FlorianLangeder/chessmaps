@@ -1,0 +1,66 @@
+html,body { height:100%; }
+#headline{
+	font-family: times, Times New Roman, times-roman, georgia,serif;
+	color: #444;
+	padding: 10px 0px 6px 0px;
+	font-size: 51px;
+	line-height: 44px;
+	letter-spacing: -2px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#mapNameTextField{
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#topPage{
+	height: 15%;
+}
+
+#leftPage{
+	padding-left: 7px;
+	display: inline-block;
+	height:75%;
+	width:25%;
+}
+
+#innerDialogLeft{
+	height: 30%;
+	display: inline-block;
+}
+
+#colorDropDown{
+	width: auto;
+}
+
+#rightPage{
+	padding-right: 7px;
+	height: 85%;
+	width: 70%;
+	float: right;
+	
+}
+
+#buttonToolBar{
+	float: right;
+	height:10%;
+}
+
+#canvasDiv{
+	height: 100%;
+	width: 100%;	
+
+  border:solid 1px #000;
+  overflow:scroll; 
+}
+#canvas {
+
+}
+
+.mouseFollow{
+	display: inline-block;
+}
