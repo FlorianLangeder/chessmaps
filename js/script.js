@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     stage = new Kinetic.Stage({container: 'canvas',width: 700,height: 700});
     boardLayer = new Kinetic.Layer(); //background layer for the chessboard
+    labelLayer = new Kinetic.Layer(); //Layer to displayer tile name/coords
     figureLayer = new Kinetic.Layer(); //layer for figures
 
     board = [[-1,-1,-1,-1,-1,-1,-1,-1],
@@ -89,11 +90,15 @@ $(document).ready(function() {
     });
 
     function drawBoard() {
-           console.log(board.length);
+       stage.setHeight(board.length*TILE_SIZE);
+       stage.setWidth(board[0].length*TILE_SIZE);
         for(var y = 0 ; y < board.length; y++){
             for(var x = 0 ; x < board[0].length; x++){
                 var tilex = x * TILE_SIZE;
                 var tiley = y * TILE_SIZE;
+                var textX = numberToAlphabet(x);
+                var textY = (board.length - y);
+
                 var rect = new Kinetic.Rect({
                     x: tilex,
                     y: tiley,
@@ -103,11 +108,26 @@ $(document).ready(function() {
                     stroke: 'black',
                     strokeWidth: 1
                 });
-                boardLayer.add(rect);   
+
+                var textLabel = new Kinetic.Text({
+                    x:tilex,
+                    y:tiley,
+                    text: ""+textX + textY,
+                    fontFamily: 'Calibri',
+                    fill: 'black'
+                });
+                boardLayer.add(rect); 
+                labelLayer.add(textLabel);
             }
         }
         stage.add(boardLayer);
+        stage.add(labelLayer);
         stage.add(figureLayer);
+    }
+
+    function numberToAlphabet(n) {
+        //97 = 'a'
+        return String.fromCharCode(97 + n);
     }
 
     function getBoardColor(x, y) {
