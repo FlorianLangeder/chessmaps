@@ -3,18 +3,18 @@
     <head>
         <meta charset='utf-8'>
         <title>chessmaps</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/jquery.powertip.css" rel="stylesheet">
         <script src='js/jquery-1.10.2.min.js'></script>
         <script src='js/kinetic-v5.0.0.js'></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="prettify/prettify.js"></script>
+        <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap.touchspin.js"></script>
         <script src="js/jquery.powertip.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/figure.js"></script>
     </head>
-    <body>
+    <body style="background-image: url(img/cream_pixels.png)">
     <div id='topPage'>
         <div id='headline'>CHESSMAPS</div>
         <input id='mapNameTextField' type="text" class="form-control" placeholder="Mapname">
@@ -26,13 +26,13 @@
                 <tr>
                     <th style="width:70%"><p>Width:</p></th>
                     <th style="min-width:107px;">
-                        <input id="heightSpinner" type="text" value="8" name="heightSpinner">
+                        <input id="widthSpinner" type="text" value="8" name="widthSpinner">
                     </th>
                 </tr>
                 <tr>
                     <th>Height:</th>
                     <th style="min-width:106px;">
-                        <input id="widthSpinner" type="text" value="8" name="widthSpinner">
+                        <input id="heightSpinner" type="text" value="8" name="heightSpinner">
                     </th>
                 </tr>
                 <tr>
@@ -53,40 +53,38 @@
 
         <div id='tileDialog'>
             <select id='colorDropDown' class="form-control">
-              <option>White</option>
-              <option>Black</option>
-              <option>Red</option>
-              <option>Green</option>
+              <option value="0">White</option>
+              <option value="1">Black</option>
             </select>
 
-            <div class="btn-group-vertical">
-                <button id="pawn" type="button" class="btn btn-default figureButton">
-                    <img id="pawnImg" src="img/wPawn.png"/>
+            <div class="btn-group-vertical" id="figureColorButton" class='background'>
+                <button type="button" class="btn btn-default figureBtn" >
+                    <img id="0" src="img/figures.png"/>
                 </button>
-                <button id="knight" type="button" class="btn btn-default figureButton">
-                    <img id="knightImg" src="img/wKnight.png"/>
+                <button type="button" class="btn btn-default figureBtn">
+                    <img id="1" src="img/figures.png"/>
                 </button>
-                <button id="bishop" type="button" class="btn btn-default figureButton">
-                    <img id="bishopImg" src="img/wBishop.png"/>
+                <button type="button" class="btn btn-default figureBtn">
+                    <img id="2" src="img/figures.png"/>
                 </button>
-                <button id="rook" type="button" class="btn btn-default figureButton">
-                    <img id="rookImg" src="img/wRook.png"/>
+                <button type="button" class="btn btn-default figureBtn">
+                    <img id="3" src="img/figures.png"/>
                 </button>
-                <button id="queen" type="button" class="btn btn-default figureButton">
-                    <img id="queenImg" src="img/wQueen.png"/>
+                <button type="button" class="btn btn-default figureBtn">
+                    <img id="4" src="img/figures.png"/>
                 </button>
-                <button id="king" type="button" class="btn btn-default figureButton">
-                    <img id="kingImg" src="img/wKing.png"/>
+                <button type="button" class="btn btn-default figureBtn">
+                    <img id="5" src="img/figures.png"/>
                 </button>
             </div>
         </div>
     </div>
     <div id='rightPage'> 
-        <div id='buttonToolBar' class='well well-sm' class="btn-toolbar" role="toolbar">
+        <div id='buttonToolBar' class='well well-sm' class="btn-toolbar" role="toolbar" data-toggle-name="radius_options" data-toggle="buttons-radio">
 
             <div class="mouseFollow">
                 <div title="Add">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
+                <button type="button" id="actionAdd" class="btn btn-default actionBtn" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-plus"></span> 
                 </button>
                 </div>
@@ -94,39 +92,23 @@
 
             <div class="mouseFollow">
                 <div title="Remove">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
+                <button type="button" id="actionRemove" class="btn btn-default actionBtn" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-minus"></span> 
                 </button>
                 </div>
             </div>
 
             <div class="mouseFollow">
-                <div title="Fill">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
-                <span class="glyphicon glyphicon-pencil"></span> 
-                </button>
-                </div>
-            </div>
-
-            <div class="mouseFollow">
                 <div title="Move">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
+                <button type="button" id="actionMove" class="btn btn-default actionBtn" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-move"></span> 
                 </button>
                 </div>
             </div>
 
             <div class="mouseFollow">
-                <div title="Clear">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
-                <span class="glyphicon glyphicon-trash"></span> 
-                </button>
-                </div>
-            </div>
-
-            <div class="mouseFollow">
                 <div title="Walkable">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
+                <button type="button" id="actionWalkable" class="btn btn-default actionBtn" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-ok"></span> 
                 </button>
                 </div>
@@ -134,15 +116,23 @@
 
             <div class="mouseFollow">
                 <div title="Not Walkable">
-                <button id="mousefollow" type="button" class="btn btn-default" name="radioGroup">
+                <button type="button" id="actionNotWalkable" class="btn btn-default actionBtn" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-remove"></span> 
                 </button>
                 </div>
             </div>
-            
+
+            <div class="mouseFollow">
+                <div title="Clear">
+                <button type="button" id="actionClear" class="btn btn-default" name="radioGroup" data-toggle="button">
+                <span class="glyphicon glyphicon-trash"></span> 
+                </button>
+                </div>
+            </div>
+<!--TODO  
             <div class="mouseFollow">
                 <div title="Save Map">
-                <button id="mousefollow" type="button" class="btn btn-default">
+                <button type="button" id="actionSave" class="btn btn-default" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-save"></span> 
                 </button>
                 </div>
@@ -150,7 +140,7 @@
 
             <div class="mouseFollow">
                 <div title="Open Map">
-                <button id="mousefollow" type="button" class="btn btn-default">
+                <button type="button" id="actionOpen" class="btn btn-default" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-folder-open"></span> 
                 </button>
                 </div>
@@ -158,12 +148,12 @@
 
             <div class="mouseFollow">
                 <div title="Upload Map">
-                <button id="mousefollow" type="button" class="btn btn-success">
+                <button type="button" id="actionUpload" class="btn btn-success" name="radioGroup" data-toggle="button">
                 <span class="glyphicon glyphicon-cloud-upload"></span> 
                 </button>
                 </div>
             </div>
-      
+-->
         </div>
         <div id='canvasDiv'>
             <div id='canvas'>

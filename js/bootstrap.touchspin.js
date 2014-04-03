@@ -52,8 +52,8 @@
             boostat: 10,
             maxboostedstep: false,
             mousewheel: true,
-            buttondown_class: "btn btn-default",
-            buttonup_class: "btn btn-default"
+            buttondown_class: "btn btn-default spinner",
+            buttonup_class: "btn btn-default spinner"
         };
 
         return this.each(function() {

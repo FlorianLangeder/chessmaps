@@ -29,7 +29,7 @@ html,body { height:100%; }
 }
 
 #innerDialogLeft{
-	height: 30%;
+	float:none;
 	display: inline-block;
 }
 
@@ -42,23 +42,33 @@ html,body { height:100%; }
 	height: 85%;
 	width: 70%;
 	float: right;
-	
 }
 
 #buttonToolBar{
-	float: right;
-	height:10%;
+	height:10% !important;
+	float:right;
 }
 
 #canvasDiv{
-	height: 100%;
+	height: 90%;
 	width: 100%;	
-
-  border:solid 1px #000;
-  overflow:scroll; 
+  	border:solid 1px #000;
+  	overflow:scroll; 
+  	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
-#canvas {
 
+.figureBtn{
+	padding: 0 0 0 0 !important;
+	overflow: hidden;
+	height: 50px;
+	width: 50px !important;
+}
+
+.glowBorder {
+   outline: none;
+   border-color: #9ecaed;
+   box-shadow: 0 0 10px #9ecaed;
 }
 
 .mouseFollow{
