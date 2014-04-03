@@ -98,12 +98,13 @@ $(document).ready(function() {
         else if(curAction == Action.Move){
             if(isFigure(moveFigure)) {
                 var pos = {"x":moveFigure.x, "y":moveFigure.y};
-                curColor = moveFigure.color;
-                curFigure = moveFigure.type;
-                board[pos.y][pos.x].img.remove();
-                board[pos.y][pos.x] = -1;
-                drawFigure(coord);
-                moveFigure = board[coord.y][coord.x];
+                if(board[coord.y][coord.x] != -2) {
+                    curColor = moveFigure.color;
+                    curFigure = moveFigure.type;
+                    removeFigure(pos.x, pos.y);
+                    drawFigure(coord);
+                    moveFigure = board[coord.y][coord.x];
+                }
             }
         }
         else if(curAction == Action.Walkable) {
